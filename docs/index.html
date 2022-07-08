@@ -2,393 +2,399 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8">
-    <meta name="robots" content="index,follow">
-    <meta name="keywords" content="コンプ,DTM,音,エフェクター,プラグイン,DAW,リミッター,クリップ,ダイナミクス">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="コンプ,DTM,音,エフェクター,プラグイン,DAW,リミッター,クリップ,ダイナミクス,仕組み,原理">
     <meta name="description" content="DTM 初心者向けに、「そもそもコンプレッサー（コンプ）を使ったらなにが嬉しいのか」を、図入りで世界一わかりやすく説明します。">
-    <link rel="stylesheet" type="text/css" media="screen,projection,tv,print" href="stylesheets/style.css" charset="utf-8">
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css">
     <title>世界一わかりやすい、音を大きくする話</title>
   </head>
-  <body>
-    <div id="container">
+  <body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <div class="container w-full md:max-w-5xl mx-auto pt-20 pb-8">
 
-      <div class="header">
-        <h1>世界一わかりやすい、音を大きくする話</h1>
-        &nbsp;
-        <span class="date">
-          2009.08 (2014.07 改訂)
-        </span>
-        by
-        <span class="author">
-          <a href="http://saihane.info">さいはね</a> a.k.a. <a href="http://twitter.com/ryochin" target="_blank">ryochin</a>
-        </span>
+      <!-- はじめに -->
+      <div class="w-full px-4 md:px-6 text-lg text-gray-800 leading-normal">
+        <div class="font-sans">
+          <h1 class="font-bold font-sans break-normal text-gray-900 pt-2 pb-4 text-3xl md:text-4xl">
+            世界一わかりやすい、音を大きくする話
+          </h1>
+          <p class="text-sm md:text-base font-normal text-gray-600">Published Aug 2009, Revised Jul 2022</p>
+        </div>
+
+        <h2 class="py-2 font-bold text-2xl pt-6">👋 はじめに</h2>
+
+        <p class="py-2">
+          曲を作りたいという人と話をしていると、
+        </p>
+
+        <blockquote class="border-l-4 border-green-500 my-8 pl-8 md:pl-6">
+          <p>
+            「コンプって大切だと聞くけど、正直何のために使うのかよくわからない」
+          </p>
+          <p>
+            「音を大きくするものらしいけど、適当に使ってみたらなぜか音が小さくなった」
+          </p>
+        </blockquote>
+
+        <p class="py-2">
+          といった話題をよく耳にします。もし曲作りで１つしかプラグインを使ってはいけないと言われたら、
+          私ならたぶんコンプレッサーを選びます。それくらい、現代の音楽作りには重要なツールです。
+        </p>
+
+        <p class="py-2">
+          そこで、重要なポイントだけ超わかりやすくまとめてみました。
+          <strong class="text-red-700">そもそもコンプレッサーを使ったらなにが嬉しいのか</strong>を、
+          難しいパラメータ等をひとまず無視して<strong class="text-red-700">実戦的</strong>に説明してみようと思います。
+        </p>
+
+        <p class="ml-4 border-gray-500 italic my-4 pl-4 md:pl-6 text-base text-gray-600 py-2">
+          オーディオ全般に通用する話ですが、特に DTM でポップス曲をミックスする初心者の方へ向けて書かれています。
+          また、歌ってみたなどでオケにボーカルを乗せたい時も参考になるでしょう。
+        </p>
       </div>
 
-      <h2>■ はじめに</h2>
+      <!-- ノーマライズ編 -->
+      <div class="w-full px-4 md:px-6 text-lg text-gray-800 leading-normal">
+        <h2 class="py-2 font-bold text-2xl pt-6">🎤 ノーマライズ編</h2>
 
-      <ul>
-        <li>「コンプって大切だと聞くけど、正直何のために使うのかよくわからない」</li>
-        <li>「音を大きくするものらしいけど、適当に使ってみたらなぜか音が小さくなった」</li>
-      </ul>
+        <p class="py-2">
+          音の素材は「ノーマライズされている」のが基本です。ノーマライズ済みとは、言い換えると
+          <strong class="text-red-700">「その音素材（ファイル）の最もレベルの高い位置が 0db」になっている状態</strong>のことです。
+          波形編集ソフトで開いてみると、ノーマライズされているかどうかは一発でわかります。
+        </p>
 
-      <p>
-        といった話をよく耳にします。もし曲作りで１つしかプラグインを使ってはいけないと言われたら、<br>
-        私ならたぶんコンプレッサーを選びます。
-      </p>
+        <p class="ml-4 border-gray-500 italic my-4 pl-4 md:pl-6 text-base text-gray-600 py-2">
+          ノーマライズは日本語で「正規化」や「標準化」みたいに書かれることがありますが、同じことです。
+        </p>
 
-      <p>
-        とても重要なエフェクトなのに、ウェブでもわかりやすい説明がないので、重要なポイントだけまとめてみました。<br>
-        ということで、<strong>そもそもコンプレッサーを使ったらなにが嬉しいのか</strong>を、難しいパラメータ等を無視して<br>
-        <strong>実戦的</strong>に説明してみようと思います。
-      </p>
+        <p class="py-2">
+          言葉にすると難しく感じますが、単純に、天井ギリギリまで信号レベル（音量）を上げることです。
+        </p>
 
-      <p>
-        オーディオ全般に通用する話ですが、特に DTM でポップス曲をミックスする初心者の方へ向けて書かれています。<br>
-        また、歌ってみたなどでオケにボーカルを乗せたい時も参考になるでしょう。
-      </p>
+        <p class="p-6">
+          <img src="images/normalize.png" alt="図１　ノーマライズ"/>
+        </p>
 
-      <h2>■ 目次</h2>
+        <p class="py-2">
+          波形編集ソフトがあれば、「ノーマライズ」機能で「0db」または「100%」を選べば一発で完了です。
+          DAW によってはその機能もついていますね。
+        </p>
 
-      <ul>
-        <li><a href="#normalize">ノーマライズ編</a>（素材の話）</li>
-        <li><a href="#compressor">コンプ編</a>（楽曲の話）</li>
-        <li><a href="#limiter">リミッター編</a>（楽曲の話）</li>
-        <li><a href="#nextstep">次のステップへ</a></li>
-      </ul>
+        <p class="py-2">
+          参考までに、
+          <a href="https://sourceforge.net/projects/audacity/?lang=ja"
+            class="text-green-500 no-underline hover:underline" target="_blank">Audacity</a>
+          での例を挙げておきます。
+        </p>
 
-      <h2 id="normalize">■ ノーマライズ編</h2>
+        <p class="p-6">
+          <img src="images/comp-normalize-window.png" alt="ノーマライズ例">
+        </p>
 
-      <p>
-        音の素材は「ノーマライズされている」のが基本です。ノーマライズ済みとは、言い換えると<br>
-        「その音素材（ファイル）の最もレベルの高い位置が 0db」になっている状態のことです。<br>
-        波形編集ソフトで開いてみると、ノーマライズされているかどうかは一発でわかります。
-      </p>
+        <p class="py-2">
+          DTM などでミックスする場合、必ず自作の音素材（たいていボーカルやギターでしょう）には、
+          あらかじめノーマライズをかけるようにしましょう。全素材の基準が揃うことになるので、のちのち調整がやりやすくなります。
+        </p>
 
-      <p class="sub">
-        ノーマライズは日本語で「正規化」や「標準化」みたいに書かれることがありますが、同じことです。
-      </p>
+        <p class="ml-4 border-gray-500 italic my-4 pl-4 md:pl-6 text-base text-gray-600 py-2">
+          なお、プロが作った素材（DAW 付属の音源や素材集）はたいてい、あらかじめノーマライズされているので、特に気にする必要はありませんよ。
+        </p>
+      </div>
 
-      <p>
-        言葉にすると難しく感じますが、単純に、ギリギリまで信号レベル（音量）を上げることです。<br>
-        図にしてみると・・
-      </p>
+      <!-- コンプレッサー編 -->
+      <div class="w-full px-4 md:px-6 text-lg text-gray-800 leading-normal">
+        <h2 class="py-2 font-bold text-2xl pt-6">🔨 コンプレッサー編</h2>
 
-      <p class="image">
-        <img src="images/normalize.png" alt="図１　ノーマライズ"/>
-      </p>
+        <p class="py-2">
+          今回の話は、次の２つの目的を併せて進めていきます（なにせ「実戦的」だからね）。
+        </p>
 
-      <p>
-        波形編集ソフトがあれば、「ノーマライズ」機能で「0db」または「100%」を選べば一発で完了です。<br>
-        DAW によってはその機能もついていますね。
-      </p>
-
-      <p>
-        参考までに、Win/Mac 対応のフリーの波形編集ソフト <a href="http://audacity.sourceforge.net/?lang=ja" target="_blank">Audacity</a> での例を挙げておきます。
-      </p>
-
-      <p class="image">
-        <img src="images/comp-normalize-window.png" alt="ノーマライズ例">
-      </p>
-
-      <p>
-        DTM などでミックスする場合、必ず自作の音素材（たいていボーカルやギターでしょう）には、<br>
-        あらかじめノーマライズをかけるようにしましょう。元の素材にまだ大きくできるマージンが<br>
-        残っているのに、コンプ等をがんばってかけたってあまり意味がありません。
-      </p>
-
-      <p class="sub">
-        なお、プロが作った素材（DAW 付属の音源や素材集）はたいてい、あらかじめノーマライズ<br>
-        されているので、特に気にする必要はありませんよ。
-      </p>
-
-      <h2 id="compressor">■ コンプ編</h2>
-
-      <p>
-        今回の話は、次の２つの目的を併せて進めていきます（なにせ「実戦的」だからね）。<br>
-      </p>
-
-      <p>
+        <p class="py-2">
         　１．音をクリップさせずに大きくする<br>
         　２．ある楽器のパート（今回はボーカル）を聴きやすくする
-      </p>
+        </p>
 
-      <p>
-        例として、次のように単純化した曲のイメージ図を用意しました（横軸は時間の流れです）。<br>
-        あなたは、ポップス曲に歌を入れたいと思い、とりあえずオケにボーカルトラックを追加してみました。
-      </p>
+        <p class="py-2">
+          例として、次のように単純化した曲のイメージ図を用意しました（横軸は時間の流れです）。
+          あなたは、ポップス曲に歌を入れたいと思い、とりあえずオケにボーカルトラックを追加してみました。
+        </p>
 
-      <p class="image">
-        <img src="images/comp-original.png" alt="図２　オケとボーカルを単純に打ち込んでみた状態">
-      </p>
+        <p class="p-6">
+          <img src="images/comp-original.png" alt="図２　オケとボーカルを単純に打ち込んでみた状態">
+        </p>
 
-      <p>
-        鳴らしてみると、「ボーカルの音がオケに埋もれてしまっているなぁ・・」と思うはずです（思って下さい）。
-      </p>
+        <p class="py-2">
+          鳴らしてみると、「ボーカルの音がオケに埋もれてしまっているなぁ・・」と思うはずです（思って下さい）。
+        </p>
 
-      <p>
-        あなたは、「そうだ！　とりあえずボーカルのレベル（音量）を上げればいいんだ」と考えるはずです（よね？）。<br>
-        では、DAW のフェーダーをいじって、ボーカルのレベルだけ上げて、目立たせてみましょう。
-      </p>
+        <p class="py-2">
+          あなたは、「そうだ！　とりあえずボーカルのレベル（音量）を上げればいいんだ」と考えるはずです（よね？）。
+          では、DAW のフェーダーをいじって、ボーカルのレベルだけ上げて、目立たせてみましょう。
+        </p>
 
-      <p class="image">
-        <img src="images/comp-simple-up.png" alt="図３　ボーカルだけレベルを上げてみたよ">
-      </p>
+        <p class="p-6">
+          <img src="images/comp-simple-up.png" alt="図３　ボーカルだけレベルを上げてみたよ">
+        </p>
 
-      <p>
-        うん、確かにボーカルがはっきり聞こえていい感じ・・。<br>
-        ところが！　ところどころボーカルの音がクリップしてしまいました（＝音が割れた）。
-      </p>
+        <p class="py-2">
+          うん、確かにボーカルがはっきり聞こえていい感じ・・。
+          　ところが！　サビの部分など、ところどころでボーカルの音がクリップしてしまいました（＝音が割れた）。
+        </p>
 
-      <p>
-        DAW のマスターチャンネルで、クリップしたことを示す赤い表示（この場合は 1.8db オーバー）が出ています。
-      </p>
+        <p class="py-2">
+          DAW のマスターチャンネルで、クリップしたことを示す赤い表示（この例では 1.8db オーバー）が出ています。
+        </p>
 
-      <p class="image">
-        <img src="images/comp-clip.png" alt="クリップの例">
-      </p>
+        <p class="p-6">
+          <img src="images/comp-clip.png" alt="クリップの例">
+        </p>
 
-      <p class="sub">
-        <span class="important">音の信号は絶対に 0db より大きくはならない</span>ので、無理矢理大きくした部分が歪（ひず）んでしまいます。<br>
-        「え、音って無限に大きくなるんじゃないの？」確かに現実世界の音はそうですね。でも、機材や PC が扱う<br>
-        「電気信号（をデジタル化したもの）」は、無限には大きくできないんですね。
-      </p>
+        <p class="ml-4 border-gray-500 italic my-4 pl-4 md:pl-6 text-base text-gray-600 py-2">
+          <strong class="text-blue-800">音の信号は絶対に 0db より大きくはならない</strong>ので、無理矢理大きくした部分が歪（ひず）んでしまいます。
+          「え、音って無限に大きくなるんじゃないの？」確かに現実世界の音はそうですね。
+          でも、機材や PC が扱う「電気信号（をデジタル化したもの）」はデータ量が決まっているので、無限の情報は詰め込めないんですね。
+        </p>
 
-      <p>
-        「音のレベルはできるだけ上げたいけど、クリップはさせたくない！」ですよね？
-      </p>
+        <p class="py-2">
+          となると問題は、<strong class="text-red-700">「音のレベルはできるだけ上げたいけど、クリップはさせたくない！</strong>」となりますよね？
+          　そこで、ボーカルトラックにコンプをかけます。
+        </p>
 
-      <p>
-        そこで、ボーカルにコンプをかけます。パラメータの詳細はがっつり省略。
-      </p>
+        <p class="py-2">
+          コンプは２段階で作用します（ここ重要）。
+        </p>
 
-      <p>
-        コンプは２段階で作用します（ここ重要）。
-      </p>
+        <p class="py-2">
+          <span class="text-blue-800">【第１段階】</span>レベルの大きい部分を、引き下げる（音をつぶす、だからコンプレッサー）
+        </p>
 
-      <p>
-        【第１段階】レベルの大きい部分を、引き下げる（音をつぶす、だからコンプレッサー）
-      </p>
+        <p class="p-6">
+          <img src="images/comp-basis.png" alt="図４〜５　コンプのしくみ">
+        </p>
 
-      <p class="image">
-        <img src="images/comp-basis.png" alt="図４〜５　コンプのしくみ">
-      </p>
+        <p class="py-2">
+          ある一定以上のレベルの部分を、「山の形を保ったまま」圧縮していきます。山が小さくなればなるほど、
+          「コンプを深くかける」とか「音をしっかりつぶす」といった言い方をします。
+          乱暴に言ってしまえば、ところどころ<strong class="text-red-700">目立ちすぎている部分を抑える</strong>わけですね。
+        </p>
 
-      <p>
-        ある一定以上のレベルの部分を、「山の形を保ったまま」圧縮していきます。山が小さくなればなるほど、<br>
-        「コンプを深くかける」とか「音をしっかりつぶす」といった言い方をします。
-      </p>
+        <p class="ml-4 border-gray-500 italic my-4 pl-4 md:pl-6 text-base text-gray-600 py-2">
+          【メリット】音の最大レベルと最小レベルの差（＝ダイナミックレンジ）が小さくなるので、聴き取りやすくなる
+          （つまり、耳にストレスがかからない）。ラジオなんかの音声も、笑い声からささやき声まで全般的に聞き取りやすい
+          ようにかなり深くかけてるようですね。
+        </p>
 
-      <p>
-        乱暴に言ってしまえば、ところどころ目立ちすぎている部分を抑えるわけですね。
-      </p>
+        <p class="ml-4 border-gray-500 italic my-4 pl-4 md:pl-6 text-base text-gray-600 py-2">
+          【デメリット】つぶしすぎると躍動感のないのっぺりした音になりますが、逆にそのほうが都合がいい音楽ジャンル・楽器・音素材もあります。
+        </p>
 
-      <p>
-        メリット：音の最大レベルと最小レベルの差（＝ダイナミックレンジ）が小さくなるので、聴き取りやすくなる<br>
-        （つまり、耳にストレスがかからない）。ラジオなんかの音声も、笑い声からささやき声まで全般的に聞き取りやすい<br>
-        ようにかなり深くかけてるようですね。
-      </p>
+        <p class="py-2">
+          では、元のオケに<strong class="text-red-700">そのまま単純に</strong>重ねて見てみましょう。こんな感じですね。
+        </p>
 
-      <p>
-        デメリット：あまりつぶしすぎると、躍動感のないのっぺりした音になります。もちろん、<br>
-        そっちのほうが都合がいい音楽ジャンル・楽器・音素材もあります。
-      </p>
+        <p class="p-6">
+          <img src="images/comp-step1.png" alt="図６　ボーカルにコンプをかけた状態（まだ途中）">
+        </p>
 
-      <p>
-        では、元のオケに重ねて見てみましょう。こんな感じですね。
-      </p>
+        <p class="py-2">
+          「えっ、これだと<strong class="text-red-700">ますますボーカルが埋もれちゃった</strong>じゃん！　むしろ音が小さくなっちゃったよ！」
+        </p>
 
-      <p class="image">
-        <img src="images/comp-step1.png" alt="図６　ボーカルにコンプをかけた状態（まだ途中）">
-      </p>
+        <p class="py-2">
+          ええ、確かにその通り。しかし！「前より天井（0db）との間のスキマが広がっている」ことに着目して、次に・・。
+        </p>
 
-      <p>
-        「ボーカルだけ取り出してみると、確かに聞き取りやすくなった・・けど、<br>
-        　これだと、ますますボーカルが埋もれちゃうじゃん！」
-      </p>
+        <p class="py-2">
+          <span class="text-blue-800">【第２段階】</span>コンプをかけたボーカルトラック全体を持ち上げる（レベルを上げる）
+        </p>
 
-      <p>
-        はい、その通り。しかし、「前より天井（0db）との間のスキマが広がっている」<br>
-        ことに着目して、次に・・。
-      </p>
+        <p class="py-2">
+          DAW のフェーダーで、ボーカルトラックのレベルを上げてみます。
+        </p>
 
-      <p>
-        【第２段階】コンプをかけたボーカルトラック全体を持ち上げる（レベルを上げる）
-      </p>
+        <p class="p-6">
+          <img src="images/comp-step2.png" alt="図７　コンプかけたボーカルのレベルを上げてみたよ">
+        </p>
 
-      <p class="image">
-        <img src="images/comp-step2.png" alt="図７　コンプかけたボーカルのレベルを上げてみたよ">
-      </p>
+        <p class="py-2">
+          すると・・　なんということでしょう！　<strong class="text-red-700">クリップさせずに、ボーカルの音だけ大きくすることができた</strong>ではありませんか！
+          （右の図２と比較しよう）
+        </p>
 
-      <p>
-        すると・・　なんということでしょう！<br>
-        <strong>クリップさせずに、ボーカルの音だけ大きくすることができた</strong>ではありませんか！<br>
-        ※右の図２と比較しよう！
-      </p>
+        <p class="py-2">
+          以上、２つの作業をコンプはいっぺんにやってくれます。便利ですね。
+        </p>
 
-      <p>
-        この２つの作業をコンプはいっぺんにやってくれます。便利ですね。
-      </p>
+        <p class="py-2">
+          コンプを積極的に使えば、「音を整理」できるようになります。特定の音を自在に目立たせて<strong class="text-red-700">立体感（奥行き）を出すことができる</strong>わけですね。
+          コンプの世界はとても奥が深く、「音作り」にも積極的に利用されます。
+          アタックを削ったりといった用途にも使用できます。プロは数十万円以上する機器を使うほど、重要なのです。
+        </p>
 
-      <p>
-        コンプを積極的に使えば、「音を整理」できるようになります。特定の音を自在に目立たせる<br>
-        ことができるわけですね。
-      </p>
+        <p class="py-2">
+          ちなみに、チャンネルに挿す場合のイコライザー（EQ）との順番ですが、「EQ → コンプ」と「コンプ → EQ」のどちらもあり得ます。
+          「EQ → コンプ」のほうが多数派のようですが、私はたいていコンプ → EQ にするほうがコントロールしやすいように思います。
+          ジャンル・楽器や好みによっても変わるようですから、自分の耳を信じるのみ、ですね。
+        </p>
 
-      <p>
-        コンプの世界はとても奥が深く、「音作り」にも積極的に利用されます。アタックを削ったり<br>
-        といった用途にも使用できます。プロは数十万円以上する機器を使うほど、重要なのです。
-      </p>
+        <p class="ml-4 border-gray-500 italic my-4 pl-4 md:pl-6 text-base text-gray-600 py-2">
+          ちなみに、よく「この曲は音圧が高いな」という言い方をしますが、全体的にコンプをガリガリに強くかけて、
+          多くの音を 0db に近づけた曲をそう表現します。波形の形から、「昆布」とか呼ばれます。それを通り越して真っ黒になると「海苔」に変わります。
+        </p>
 
-      <p>
-        チャンネルに挿す場合のイコライザー（EQ）との順番ですが、「EQ → コンプ」と<br>
-        「コンプ → EQ」のどちらもあり得ます。「EQ → コンプ」のほうが多数派のようですが、<br>
-        私はたいていコンプ → EQ にするほうがコントロールしやすいように思います。ジャンル・<br>
-        楽器や好みによっても変わるようですから、自分の耳を信じるのみ、ですね。
-      </p>
+        <p class="p-6">
+          <img src="images/comp-kelp.png" alt="参考　昆布状態！">
+        </p>
+      </div>
 
-      <p class="sub">
-        ちなみに、よく「この曲は音圧が高いな」という言い方をしますが、全体的にコンプを<br>
-        ガリガリに強くかけて、多くの音を 0db に近づけた曲をそう表現します。波形の形から、<br>
-        「昆布」とか呼ばれます。それを通り越して真っ黒になると「海苔」に変わります。
-      </p>
+      <!-- リミッター編 -->
+      <div class="w-full px-4 md:px-6 text-lg text-gray-800 leading-normal">
+        <h2 class="py-2 font-bold text-2xl pt-6">🔨 リミッター編</h2>
 
-      <p class="image">
-        <img src="images/comp-kelp.png" alt="参考　昆布状態！">
-      </p>
+        <p class="py-2">
+          コンプと同じくらいリミッターは重要です。
+          というか実はこの２つ、機能的には同じ仲間で、大きくみると<strong class="text-red-700">「リミッターはコンプの特殊な使い方の１つ」と見なせます</strong>。
+        </p>
 
-      <h2 id="limiter">■ リミッター編</h2>
+        <p class="ml-4 border-gray-500 italic my-4 pl-4 md:pl-6 text-base text-gray-600 py-2">
+          円は楕円の特殊な状態、というのに似ていますね。
+        </p>
 
-      <p>
-        コンプと同じくらいリミッターは重要です。というか、実はこの２つ、機能的には<br>
-        同じ仲間で、大きくみると<strong>「リミッターはコンプの使い方の１つ」に過ぎません</strong>。<br>
-        （円は楕円の特殊な状態、というのに似ていますね）
-      </p>
+        <p class="py-2">
+          リミッターは、有無を言わさず指定したレベルまでぶっつぶして、ぴったりそのレベルに合わせてしまいます。
+        </p>
 
-      <p>
-        有無を言わさず指定したレベルまでぶっつぶして、ぴったりそのレベルに合わせてしまいます。
-      </p>
+        <p class="p-6">
+          <img src="images/limiter-basis.png" alt="図８〜９　リミッターのしくみ">
+        </p>
 
-      <p class="image">
-        <img src="images/limiter-basis.png" alt="図８〜９　リミッターのしくみ">
-      </p>
+        <p class="py-2">
+          用途としては<strong class="text-red-700">「絶対にクリップして欲しくない時」に使うツール</strong>です。なので、マスターチャンネルにはふつう必ず挿します。
+          たいてい、0db （や -0.1db）あたりに設定して、音の出口（プラグインのチェインの最後）に挿します。
+          それからエレキギターなど、ときどき高いピーク（音のレベルがとりわけ高い部分）が出やすい素材にも使ったりします。
+        </p>
 
-      <p>
-        コンプでも、設定すれば全く同じ効果が得られますが、だいたいは別の<br>
-        プラグインになっています（そっちのほうが便利だから）。
-      </p>
+        <p class="ml-4 border-gray-500 italic my-4 pl-4 md:pl-6 text-base text-gray-600 py-2">
+          ちなみにコンプを使っても設定次第で（ほぼ）同じ効果が得られますが、利便性のためと、音作りの用途の違いのために、別のプラグインという扱いになっているわけです。
+        </p>
 
-      <p>
-        どんな時に使うかというと、「絶対にクリップして欲しくない時」です。だから、<br>
-        マスターチャンネルにはふつう必ず挿します。それからエレキギターなど、ときどき<br>
-        高いピーク（音のレベルがとりわけ高い部分）が出やすい楽器などですね。<br>
-      </p>
+        <p class="py-2">
+          コンプは指定した圧縮率に沿って、山の形を保ったままゆるやかに圧縮しますが、リミッターは過激です。
+          そのぶん、リミットがかかった前後はわりと不自然になりがちです。なので、音作りの道具としてはあまり使われません。
+          言ってみれば、<strong class="text-red-700">コンプは「攻めのツール」、リミッターは「守りのツール」</strong>です。
+        </p>
 
-      <p>
-        コンプは指定した圧縮率に沿ってゆるやかに圧縮しますが、リミッターは過激です。<br>
-        そのぶん、リミットがかかった前後はわりと不自然になりがちです。なので、<br>
-        音作りの道具というよりは、どちらかというと「安全のためのツール」だと思って下さい。
-      </p>
+        <p class="py-2">
+          また、コンプとリミッターを同時に使うこともよくあります。というか、ヘンな話ですが、
+          例えば私が使っているコンプには、コンプの中にリミッター機能があります（ややこしい）。
+        </p>
 
-      <p>
-        また、コンプとリミッターを同時に使うこともよくあります。というか、ヘンな話ですが、<br>
-        例えば私が使っているコンプには、コンプの中にリミッター機能があります（ややこしい）。
-      </p>
+        <p class="py-2">
+          より積極的な使い方をする例としては「マキシマイザー」や「ファイナライザー」といった別のエフェクトとして扱われます。
+        </p>
+      </div>
 
-      <p>
-        たいてい、0db （や -0.1db）あたりに設定して、音の出口（プラグインのチェインの最後）に<br>
-        挿します。
-      </p>
+      <!-- 次のステップへ -->
+      <div class="w-full px-4 md:px-6 text-lg text-gray-800 leading-normal">
+        <h2 class="py-2 font-bold text-2xl pt-6">➡️ 次のステップへ</h2>
 
-      <p>
-        より積極的な使い方をする例としては「マキシマイザー」や「ファイナライザー」といった<br>
-        別のエフェクトとして扱われます。
-      </p>
+        <p class="py-2">
+          今回はボーカルを例にとりましたが、全ての楽器で同じ事が言えます。
+        </p>
 
-      <h2 id="nextstep">■ 次のステップへ</h2>
+        <p class="py-2">
+          「音を前に出す（目立たせる）」にはコンプが必須です。ポップスなどは音がたくさん鳴っているので、
+          ボーカルやリード楽器（ギター・鍵盤など）を音の海から目立たせる必要があります（＝メリハリをつける）。
+        </p>
 
-      <p>
-        今回はボーカルを例にとりましたが、全ての楽器で同じ事が言えます。<br>
-      </p>
+        <p class="py-2">
+          <strong class="text-red-700">「音を目立たせる」ことは、単純に「音のレベルを上げる」ことではない</strong>ということを感じて頂けたなら、幸いです。
+          次の段階として、楽器ごとにパラメータを変えたり実験をしてみるとよいでしょう。
+        </p>
+      </div>
 
-      <p>
-        「音を前に出す（目立たせる）」にはコンプが必須です。ポップスなどは音がたくさん鳴っているので、<br>
-        ボーカルやリード楽器（ギター・鍵盤など）を音の海から目立たせる必要があります（＝メリハリをつける）。
-      </p>
+      <!-- オマケ -->
+      <div class="w-full px-4 md:px-6 text-lg text-gray-800 leading-normal">
+        <h2 class="py-2 font-bold text-2xl pt-6">🍭 オマケ</h2>
 
-      <p>
-        「音を目立たせる」ことは、単純に「音のレベルを上げる」ことではない、ということを感じて頂けたなら、<br>
-        幸いです。次の段階として、楽器ごとにパラメータを変えたり実験をしてみるとよいでしょう。
-      </p>
+        <p class="py-2">
+          コンプありと無しでどれくらい印象が変わるのかの参考に、短い音源を用意してみました。
+          私もそんなに使いこなせていませんし、ミックスは勉強中なのでお遊びとしてひとつヨロシク。
+        </p>
 
-      <p>
-        もっと詳しく知りたくてたまらないひとは、コンプ特集が載っている音楽雑誌をブックオフで探すのをおすすめします。<br>
-        ウェブを検索してもきれいに説明しているサイトはなかなかありませんので。それでは、快適な DTM ライフを！
-      </p>
+        <p class="py-2">
+          両方ともノーマライズを１００％（0db に合わせて、つまり最大限）かけてあります。
+          ポップス曲としては、それほどコンプをかけていない部類に入るので、少しわかりにくいかもしれません。
+          できればヘッドホンでどうぞ。
+        </p>
 
-      <p>
-        もう少し詳しく解説されているサイトを挙げておきます。
-      </p>
+        <p class="py-2">
+          <span class="text-blue-800">【コンプなし】</span>すでに完成している曲からコンプ類をオフにして、バランスを調整しなおしてみました。
+        </p>
 
-      <ul>
-        <li><a href="http://niconico-toolbox.blog.jp/archives/1104124.html" target="_blank">あなたはボーカルにコンプレッサーを使っていますか？</a></li>
-      </ul>
+        <p class="py-2">
+          <audio src="audios/comp_off.mp3" controls></audio>
+        </p>
 
-      <h2>■ オマケ</h2>
+        <p class="p-6">
+          <img src="images/comp-wave-off.png" alt="コンプ無しの波形">
+        </p>
 
-      <p>
-        コンプありと無しでどれくらい印象が変わるのかの参考に、短い音源を用意してみました。<br>
-        私もそんなに使いこなせていませんし、ミックスは勉強中なのでお遊びとしてひとつヨロシク。
-      </p>
+        <p class="py-2">
+          <span class="text-blue-800">【コンプあり】</span>オリジナルのものです。
+        </p>
 
-      <p>
-        両方ともノーマライズを１００％（0db に合わせて、つまり最大限）かけてあります。<br>
-        ポップス曲としては、それほどコンプをかけていない部類に入るので、少しわかりにくいかもしれません。<br>
-        できればヘッドホンでどうぞ。
-      </p>
+        <p class="py-2">
+          <audio src="audios/comp_on.mp3" controls></audio>
+        </p>
 
-      <p>
-        【コンプなし】すでに完成している曲からコンプ類をオフにして、バランスを調整しなおしてみました。
-      </p>
+        <p class="p-6">
+          <img src="images/comp-wave-on.png" alt="コンプありの波形">
+        </p>
 
-      <p>
-        <object type="application/x-shockwave-flash" data="assets/dewplayer-mini.swf?mp3=audios/comp_off.mp3" width="160" height="20" id="comp-off-mp3">
-          <param name="wmode" value="transparent">
-          <param name="movie" value="assets/dewplayer-mini.swf?mp3=audios/comp_off.mp3">
-        </object>
-      </p>
+        <p class="py-2">
+          いかがでしょうか？　コンプ無しだとやはりキツいですね、これくらいが限界です。それだけ単体で聴いてみると
+          わりと違和感ないというかそれなりなのですが、聞き比べるとだいぶ印象が変わることがわかると思います。
+        </p>
 
-      <p class="image">
-        <img src="images/comp-wave-off.png" alt="コンプ無しの波形">
-      </p>
-
-      <p>
-        【コンプあり】オリジナルのものです。
-      </p>
-
-      <p>
-        <object type="application/x-shockwave-flash" data="assets/dewplayer-mini.swf?mp3=audios/comp_on.mp3" width="160" height="20" id="comp-on-mp3">
-          <param name="wmode" value="transparent">
-          <param name="movie" value="assets/dewplayer-mini.swf?mp3=audios/comp_on.mp3">
-        </object>
-      </p>
-
-      <p class="image">
-        <img src="images/comp-wave-on.png" alt="コンプありの波形">
-      </p>
-
-      <p>
-        いかがでしょうか？　コンプ無しだとやはりキツいですね、これくらいが限界です。それだけ単体で聴いてみると<br>
-        わりと違和感ないというかそれなりなのですが、聞き比べるとだいぶ印象が変わることがわかると思います。
-      </p>
-
-      <p>
-        コンプ無しのものは、なにか手前に壁があるように感じませんか？　音自体はクリアなのに・・。<br>
-        コンプを使うと、特定のトラックの「音を前に出す」ことによって、立体感を持たすことができるわけですね。
-      </p>
-
-      <p>
-        おわり。
-      </p>
+        <p class="py-2">
+          コンプ無しのものは、なにか手前に壁があるように感じませんか？　音自体はクリアなのに・・。
+          コンプを使うと、特定のトラックの「音を前に出す」ことによって、立体感を持たすことができるわけですね。
+        </p>
+      </div>
     </div>
 
+    <footer class="bg-white border-t border-gray-400 shadow">
+      <div class="container max-w-4xl mx-auto flex py-8">
+        <div class="w-full mx-auto flex flex-wrap">
+          <div class="flex w-full md:w-2/3 ">
+            <div class="px-8">
+              <h3 class="font-bold text-gray-900">About Me</h3>
+              <p class="py-4 text-gray-600 text-sm">
+                昔にいくつか<a class="text-green-500 no-underline hover:underline"
+                  href="https://www.nicovideo.jp/user/4630161/mylist/4153585?sortKey=viewCount&amp;sortOrder=desc"
+                  target="_blank">曲を作ったり</a>していました。
+
+                音質向上版も<a class="text-green-500 no-underline hover:underline"
+                  href="https://saihane.bandcamp.com/"
+                  target="_blank">公開しています</a>。
+              </p>
+            </div>
+          </div>
+          <div class="flex w-full md:w-1/3">
+            <div class="px-8">
+              <h3 class="font-bold text-gray-900">Social</h3>
+              <ul class="list-reset items-center text-sm pt-3">
+                <li>
+                  <a class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:text-underline py-1"
+                    href="https://twitter.com/ryochin" target="_blank">
+                    @ryochin
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
